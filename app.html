@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rchies Mobile - Banking Platform</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .container {
+            max-width: 400px;
+            margin: 20px auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .menu {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+        .menu-item {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            margin: 5px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        .menu-item:hover {
+            background: #0056b3;
+        }
+        .form-section {
+            display: none;
+            padding: 20px;
+        }
+        .form-section.active {
+            display: block;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #218838;
+        }
+        .back-btn {
+            background: #6c757d;
+            margin-bottom: 20px;
+        }
+        .back-btn:hover {
+            background: #5a6268;
+        }
+        .balance {
+            text-align: center;
+            padding: 10px;
+            background: #e9ecef;
+            font-weight: bold;
+        }
+        .history-list {
+            list-style: none;
+            padding: 0;
+        }
+        .history-item {
+            background: #f8f9fa;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .rewards-section {
+            text-align: center;
+        }
+        .home-link {
+            display: block;
+            text-align: center;
+            margin: 10px 0;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .home-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Rchies Mobile</h1>
+        <p>Your Secure Banking & Payment App</p>
+        <a href="index.html" class="home-link">Back to Home</a>
+    </div>
+    
+    <div class="container">
+        <div class="balance">
+            Account Balance: ₦50,000.00
+        </div>
+        
+        <div id="main-menu" class="menu">
+            <button class="menu-item" onclick="showForm('deposit')">Deposit</button>
+            <button class="menu-item" onclick="showForm('withdraw')">Withdraw</button>
+            <button class="menu-item" onclick="showForm('betting')">Fund Betting</button>
+            <button class="menu-item" onclick="showForm('electricity')">Electricity Bill</button>
+            <button class="menu-item" onclick="showForm('water')">Water Bill</button>
+            <button class="menu-item" onclick="showForm('recharge')">Airtime Recharge</button>
+            <button class="menu-item" onclick="showForm('data')">Data Subscription</button>
+            <button class="menu-item" onclick="showForm('tv')">TV Recharge</button>
+            <button class="menu-item" onclick="showForm('loan')">Apply for Loan</button>
+            <button class="menu-item" onclick="showForm('history')">Transaction History</button>
+            <button class="menu-item" onclick="showForm('checkin')">Daily Check-In</button>
+            <button class="menu-item" onclick="showForm('rewards')">Rewards & Bonuses</button>
+            <button class="menu-item" onclick="showForm('more')">More Options</button>
+        </div>
+        
+        <!-- Deposit Form -->
+        <div id="deposit" class="form-section">
+            <button class="back-btn" onclick="showMenu()">← Back</button>
+            <h3>Deposit Funds</h3>
+            <form onsubmit="handleTransaction(event, 'deposit')">
+                <div class="form-group">
+                    <label>Amount (₦)</label>
+                    <input type="number" name="amount" placeholder="Enter amount" required>
+                </div>
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <select name="method" required>
+                        <option>Bank Transfer</option>
+                        <option>Card</option>
+                        <option>USSD</option>
+                    </select>
+                </div>
+                <button type="submit">Deposit Now</button>
+            </form>
+        </div>
+        
+        <!-- Withdraw Form -->
+        <div id="withdraw" class="form-section">
+            <button class="back-btn" onclick="showMenu()">← Back</button>
+            <h3>Withdraw Funds</h3>
+            <form onsubmit="handleTransaction(event, 'withdraw')">
+                <div class="form-group">
+                    <label>Amount (₦)</label>
+                    <input type="number" name="amount" placeholder="Enter amount" required>
+                </div>
+                <div class="form-group">
+                    <label>Account Number</label>
+                    <input type="text" name="account" placeholder="Enter bank account number" required>
+                </div>
+                <button type="submit">Withdraw</button>
+            </form>
+        </div>
+        
+        <!-- Betting Fund Form -->
+        <div id="betting" class="form-section">
+            <button class="back-btn" onclick="showMenu()">← Back</button>
+            <h3>Fund Betting Platform</h3>
+            <form onsubmit="handleTransaction(event, 'betting')">
+                <div class="form-group">
+                    <label>Platform</label>
+                    <select name="platform" required>
+                        <option>Sporty Bet</option>
+                        <option>1x Bet</option>
+                        <option>Betano</option>
+                        <option>MSport</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Amount (₦)</label>
+                    <input type="number" name="amount" placeholder="Enter amount" required>
+                </div>
+                <div class="form-group">
+                    <label>Wallet ID/Phone</label>
+                    <input type="text" name="wallet" placeholder="Enter wallet ID or phone number" required>
+                </div>
+                <button type="submit">Fund Account</button>
+            </form>
+        </div>
+        
+        <!-- Electricity Bill Form -->
+        <div id="electricity" class="form-section">
+            <button class="back-btn" onclick="showMenu()">← Back</button>
+            <h3>Pay Electricity Bill</h3>
+            <form onsubmit="handleTransaction(event, 'electricity')">
+                <div class="form-group">
+                    <label>Meter Number</label>
+                    <input type="text" name="meter" placeholder="Enter meter number" required>
+                </div>
+                <div class="form-group">
+                    <label>Amount (₦)</label>
+                    <input type="number" name="amount" placeholder="Enter amount" required>
+                </div>
+                <div class="form-group">
+                    <label>Provider</label>
+                    <select name="provider" required>
+                        <option>EKEDC</option>
+                        <option>IKEDC</option>
+                        <option>PHCN</option>
+                    </select>
+                </div>
+                <button type="submit">Pay Bill</button>
+            </form>
+        </div>
+        
+        <!-- Water Bill Form -->
+        <div id="water" class="form-section">
+            <button class="back-btn" onclick="showMenu()">← Back</button>
+            <h3>Pay Water Bill</h3>
+            <form onsubmit="handleTransaction(event, 'water')">
+                <div class="form-group">
+                    <label>Account Number</label>
+                    <input type="text" name="account" placeholder="Enter account number" required>
+                </div>
+                <div class="form-group">
+                    <label>Amount (₦)</label>
+                    <input type="number" name="amount" placeholder="Enter amount" required>
+                </div>
+                <div class="form-group">
+                    <label>Provider</label>
+                    <select name="provider" required>
+                        <option>Lagos Water Corporation</option>
+                        <option>Abuja Water Board</option>
+                    </select>
+                </div>
+                <button type="submit">Pay Bill</button>
+            </form>
+        </div>
+        
+        <!-- Airtime Recharge Form -->
+        <div id="recharge" class="form-section">
+            <button class="back-btn" onclick="showMenu()">← Back</button>
+            <h3>Airtime Recharge</h3>
+            <form onsubmit="handleTransaction(event, 'recharge')">
+                <div class="form-group">
+                    <label>Network</label>
+                    <select name="network" required>
+                        <option>MTN</option>
+                        <option>Airtel</option>
+                        <option>9mobile</option>
+                        <option>Glo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" name="phone" placeholder="Enter phone number" required>
+                </div>
+                <div class="form-group">
+                    <label>Amount (₦)</label>
+                    <input type="number" name="amount" placeholder="Enter amount" required>
+                </div>
+                <button type="submit">Recharge Now</button>
+            </form>
+        </div>
+        
+        <!-- Data Subscription Form -->
+        <div id="data" class="form-section">
+            <button class="back-btn" onclick="showMenu()">← Back</button>
+            <h3>Data Subscription</h3>
+            <form onsubmit="handleTransaction(event, 'data')">
+                <div class="form-group">
+                    <label>Network</label>
+                    <select name="network" required>
+                        <option>MTN</option>
+                        <option>Airtel</option>
+                        <option>9mobile</option>
+                        <option>Glo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" name="phone" placeholder="Enter phone number" required>
+                </div>
+                <div class="form-group">
+                    <label>Data Plan</label>
+                    <select name="plan" required>
+                        <option>500MB - ₦200</option>
+                        <option>1GB - ₦300</option>
+                        <option>2GB - ₦500</option>
+                        <option>5GB - ₦1000</option>
+                    </select>
+                </div>
+                <button type="submit">Subscribe Now</button>
+            </form>
+        </div>
+        
+        <!-- TV Recharge Form -->
+        <div id="tv" class="form-section">
+            <button class="back-btn" onclick="showMenu()">← Back</button>
+            <h3>TV Recharge</h3>
+            <form onsubmit="handleTransaction(event, 'tv')">
+                <div class="form-group">
+                    <label>Provider</label>
+                    <select name="provider" required>
+                        <option>DSTV</option>
+                        <option>GOTV</option>
+                        <option>Startimes</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Smartcard Number</label>
+                    <input type="text" name="smartcard" placeholder="Enter smartcard number" required>
+                </div>
+                <div class="form-group">
+                    <label>Amount (₦)</label>
+                    <input type="number" name="amount" placeholder="Enter amount" required>
+                </div>
+                <button type="submit">Recharge Now</button>
+            </form>
+        </div>
+        
+        <!-- Loan Application Form -->
+        <div id="loan" class="form-section">
+            <button class="back-btn" onclick="showMenu()">← Back</button>
+            <h3>Apply for Loan</h3>
+            <form onsubmit="handleTransaction(event, 'loan')">
+                <div class="form-group">
+                    <label>Loan Amount (₦)</label>
+                    <input type="number" name="amount" placeholder="Enter loan amount" required>
+                </div>
+                <div class="form-group">
+                    <label>Duration (Months)</label>
+                    <select name="duration" required>
+                        <option>3</option>
+                        <option>6</option>
+                        <option>12</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Purpose</label>
+                    <input type="text" name="purpose" placeholder="Enter loan purpose" required>
+                </div>
+                <button type="submit">Apply Now</button>
+            </form>
+        </div>
+        
+        <!-- Transaction History -->
+        <div id="history" class="form-section">
+            <button class="back-btn" onclick="showMenu()">← Back</button>
+            <h3>Transaction History</h3>
+            <ul class="history-list">
+                <li class="history-item">Deposit: ₦10,000 - 2025-10-01</li>
+                <li class="history-item">Withdraw: ₦5,000 - 2025-10-02</li>
+                <li class="history-item">Airtime Recharge: ₦500 - 2025-10-03</li>
+                <li class="history-item">Betting Fund: ₦2,000 - 2025-10-04</li>
+            </ul>
+        </div>
+        
+        <!-- Daily Check-In -->
+        <div id="checkin" class="form-section">
+            <button class="back-btn" onclick="showMenu()">← Back</button>
+            <h3>Daily Check-In for Rewards</h3>
+            <div class="rewards-section">
+                <p>Check in daily to earn rewards!</p>
+                <button onclick="handleCheckIn()">Check In Now</button>
+            </div>
+        </div>
+        
+        <!-- Rewards & Bonuses -->
+        <div id="rewards" class="form-section">
+            <button class="back-btn" onclick="showMenu()">← Back</button>
+            <h3>Rewards & Bonuses</h3>
+            <div class="rewards-section">
+                <p>Available Rewards: 200 points</p>
+                <button onclick="handleReward()">Claim Bonus</button>
+            </div>
+        </div>
+        
+        <!-- More Options -->
+        <div id="more" class="form-section">
+            <button class="back-btn" onclick="showMenu()">← Back</button>
+            <h3>More Options</h3>
+            <div class="menu">
+                <button class="menu-item">Settings</button>
+                <button class="menu-item">Support</button>
+                <button class="menu-item">About Us</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Show/hide forms
+        function showForm(formId) {
+            document.querySelectorAll('.form-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(formId).classList.add('active');
+            document.getElementById('main-menu').style.display = 'none';
+        }
+        
+        function showMenu() {
+            document.querySelectorAll('.form-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById('main-menu').style.display = 'flex';
+        }
+        
+        // Handle transactions (send to webhook)
+        async function handleTransaction(event, type) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const payload = { type, userId: 'bigfrankmoney10' }; // Replace with real user ID
+            formData.forEach((value, key) => { payload[key] = value; });
+
+            try {
+                const response = await fetch('https://api.rchiesmobile.com/webhook', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await response.json();
+                alert(`Transaction processed: ${data.message || 'Success'} (Demo Mode)`);
+                showMenu();
+                form.reset();
+            } catch (error) {
+                alert('Error processing transaction: ' + error.message);
+            }
+        }
+
+        // Handle check-in and rewards
+        async function handleCheckIn() {
+            try {
+                const response = await fetch('https://api.rchiesmobile.com/webhook', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ type: 'checkin', userId: 'bigfrankmoney10', points: 50 })
+                });
+                const data = await response.json();
+                alert('Checked in! You earned 50 points. (Demo Mode)');
+            } catch (error) {
+                alert('Error processing check-in: ' + error.message);
+            }
+        }
+
+        async function handleReward() {
+            try {
+                const response = await fetch('https://api.rchiesmobile.com/webhook', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ type: 'reward', userId: 'bigfrankmoney10', bonus: 100 })
+                });
+                const data = await response.json();
+                alert('Bonus claimed! ₦100 added to your account. (Demo Mode)');
+            } catch (error) {
+                alert('Error claiming reward: ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html>
