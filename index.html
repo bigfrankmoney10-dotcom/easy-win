@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rchies Mobile - Your Trusted Banking Platform</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section h2 {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+        .service-grid, .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .service-item, .testimonial-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #218838;
+        }
+        .tracking-section {
+            text-align: center;
+            padding: 20px;
+            background: #e9ecef;
+            border-radius: 8px;
+        }
+        .contact-info p {
+            margin: 5px 0;
+        }
+        .video-placeholder {
+            background: #ddd;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #007bff;
+            color: white;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>RCHIES MOBILE</h1>
+        <p>Your Trusted Partner for Banking and Payments</p>
+        <a href="app.html"><button style="background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px;">Go to Banking App</button></a>
+    </div>
+
+    <div class="container">
+        <!-- About Us -->
+        <div class="section">
+            <h2>About Rchies Mobile</h2>
+            <p>Rchies Mobile is your all-in-one banking platform, offering secure and efficient solutions for deposits, withdrawals, bill payments, betting platform funding, airtime/data recharges, and more. With advanced technology and a user-friendly interface, we ensure seamless financial management for individuals and businesses.</p>
+        </div>
+
+        <!-- Our Services -->
+        <div class="section">
+            <h2>Our Services</h2>
+            <div class="service-grid">
+                <div class="service-item">
+                    <h3>Deposits & Withdrawals</h3>
+                    <p>Effortlessly deposit and withdraw funds with secure payment methods, including bank transfers, cards, and USSD, ensuring fast and reliable transactions.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Bill Payments</h3>
+                    <p>Pay electricity, water, and TV bills with ease. Our platform supports multiple providers, ensuring quick and accurate payments.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Betting Platform Funding</h3>
+                    <p>Fund your favorite betting platforms like Sporty Bet, 1x Bet, Betano, and MSport directly from your Rchies Mobile wallet.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Airtime & Data Recharge</h3>
+                    <p>Recharge MTN, Airtel, 9mobile, or Glo airtime and data plans instantly, with flexible options to suit your needs.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Rewards & Bonuses</h3>
+                    <p>Earn points through daily check-ins and claim bonuses to enhance your banking experience with exclusive offers.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Loan Services</h3>
+                    <p>Apply for quick loans with customizable terms, designed to meet your financial needs with minimal hassle.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Section -->
+        <div class="section">
+            <h2>Watch Rchies Mobile in Action</h2>
+            <div class="video-placeholder">
+                <p>Your browser does not support the video tag. Enable JavaScript to see a demo of our banking platform.</p>
+            </div>
+            <p>Explore our seamless banking process, from deposits to bill payments, with this video showcasing our user-friendly interface and secure transactions.</p>
+        </div>
+
+        <!-- Subscribe Section -->
+        <div class="section">
+            <h2>Subscribe to Our Newsletter</h2>
+            <p>Stay updated with the latest features, offers, and financial tips from Rchies Mobile!</p>
+            <form>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                </div>
+                <button type="submit">Subscribe Now</button>
+            </form>
+        </div>
+
+        <!-- Transaction Tracker -->
+        <div class="section tracking-section" id="track">
+            <h2>Track Your Transaction</h2>
+            <p>When you have eliminated the JavaScript, whatever remains must be an empty page. Enable JavaScript to see transaction history and real-time updates.</p>
+            <form>
+                <div class="form-group">
+                    <label for="transaction-id">Transaction ID</label>
+                    <input type="text" id="transaction-id" placeholder="Enter transaction ID" required>
+                </div>
+                <button type="submit">Track Now</button>
+            </form>
+        </div>
+
+        <!-- Customer Testimonials -->
+        <div class="section">
+            <h2>Customer Testimonials</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-item">
+                    <p><strong>Chidinma Okeke</strong></p>
+                    <p>Rchies Mobile made bill payments so easy! Paid my electricity bill in seconds with clear updates. Highly recommend!</p>
+                </div>
+                <div class="testimonial-item">
+                    <p><strong>Tunde Adebayo</strong></p>
+                    <p>Funded my Sporty Bet account instantly. Secure and fast—Rchies Mobile is my go-to for transactions!</p>
+                </div>
+                <div class="testimonial-item">
+                    <p><strong>Aisha Bello</strong></p>
+                    <p>The daily check-in rewards are amazing! I claimed a bonus that boosted my account. Great service!</p>
+                </div>
+                <div class="testimonial-item">
+                    <p><strong>Emeka Nwosu</strong></p>
+                    <p>Recharged my MTN data in a snap. Rchies Mobile’s interface is smooth and reliable!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Us -->
+        <div class="section contact-info">
+            <h2>Contact Us</h2>
+            <p><strong>Phone:</strong> +234 (123) 456-7890</p>
+            <p><strong>Email:</strong> support@rchiesmobile.com</p>
+            <p><strong>Headquarters:</strong> Lagos, Nigeria</p>
+        </div>
+
+        <!-- Support Hours -->
+        <div class="section">
+            <h2>Support Hours</h2>
+            <p>Monday - Sunday: 8 AM - 8 PM WAT</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Welcome to Rchies Mobile! How can we help you?</p>
+    </footer>
+
+    <script>
+        // Placeholder for form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Feature requires JavaScript. Transaction tracking and newsletter subscription coming soon! (Demo Mode)');
+        });
+    </script>
+</body>
+</html>
