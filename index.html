@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>EasyWin — Invest. Spin. Earn.</title>
   <meta name="description" content="EasyWin — Spin to unlock massive deposit bonuses up to $60,000!">
+  <!-- Google Translate -->
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   <style>
     :root{
       --bg:#031026;
@@ -69,6 +71,14 @@
     h2{margin:0;font-size:20px;cursor:pointer}
     p.lead{color:var(--muted-2);margin-top:8px}
 
+    /* Testimonials Slider */
+    .testimonial-slider{position:relative;overflow:hidden}
+    .testimonial{transition:opacity 0.5s ease-in-out;opacity:0;position:absolute;width:100%;padding:12px;background:var(--glass);border-radius:8px}
+    .testimonial.active{opacity:1;position:relative}
+    .testimonial-dots{display:flex;gap:8px;justify-content:center;margin-top:12px}
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--muted-2);cursor:pointer;transition:all 0.3s}
+    .dot.active{background:var(--accent)}
+
     /* Spinning Button */
     .spin-btn{animation:spin 2s linear infinite paused}
     .spin-btn.spinning{animation-play-state:running}
@@ -89,6 +99,7 @@
     @media(max-width:700px){.wheel{width:300px;height:300px}}
     .wheel .center{width:140px;height:140px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#041a2b,#07324f);font-weight:900;color:#dff3ff;box-shadow:inset 0 -8px 20px rgba(0,0,0,0.6);font-size:18px}
     .pointer{position:absolute;top:-18px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:22px solid transparent;border-right:22px solid transparent;border-bottom:34px solid #ffd74d;border-radius:3px;z-index:5;filter:drop-shadow(0 6px 12px rgba(0,0,0,0.6))}
+    .wheel-label{position:absolute;font-size:12px;font-weight:700;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,0.8);pointer-events:none}
 
     /* forms & inputs */
     input,textarea,select{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:var(--glass);color:#eaf7ff;width:100%;margin-top:6px;box-sizing:border-box;font-size:16px}
@@ -104,9 +115,20 @@
     table{width:100%;border-collapse:collapse;font-size:13px}
     table th,table td{padding:8px;border-bottom:1px solid rgba(255,255,255,0.03);text-align:left;color:var(--muted-2)}
 
-    /* responsive */
+    /* Google Translate */
+    .goog-te-gadget{font-family:inherit !important}
+    .goog-te-combo{margin:0;padding:5px;background:var(--glass);border:1px solid rgba(255,255,255,0.1);color:#fff;border-radius:6px}
+    .goog-te-combo:hover{background:var(--glass)}
+    #google_translate_element{margin:10px 0}
+
+    /* Contact Form */
+    .contact-form .flex{justify-content:space-between}
+    .contact-form button[type="submit"]{background:var(--success);width:100%;margin-top:12px}
+
+    /* Responsive */
     @media(max-width:700px){
       .center-cta{display:none}
+      .flex{flex-direction:column}
     }
   </style>
 </head>
@@ -120,6 +142,8 @@
       <h2>🎉 CONGRATULATIONS! 🎉</h2>
       <div id="prize-amount" style="font-size:48px;font-weight:900;color:#fff;margin:16px 0"></div>
       <p style="margin:0;color:rgba(255,255,255,0.9);font-size:18px">You won a massive bonus!</p>
+      <p id="deposit-prompt" style="margin:12px 0;font-weight:700;color:#fff;font-size:16px"></p>
+      <button onclick="navTo('deposit')" class="cta" style="padding:12px 24px;margin-top:12px">💰 DEPOSIT NOW</button>
       <div class="celebration-stars" id="celebrationStars"></div>
     </div>
   </div>
@@ -134,29 +158,32 @@
         </div>
       </div>
 
+      <!-- Desktop Nav -->
       <nav class="desktop" aria-label="Main navigation">
         <a onclick="navTo('home')" class="active">🏠 Home</a>
-        <a onclick="navTo('dashboard')">📊 Dashboard</a>
+        <a onclick="navTo('spin')">🎡 Spin & Win</a>
         <a onclick="navTo('deposit')">💰 Deposit</a>
         <a onclick="navTo('withdraw')">💸 Withdraw</a>
-        <a onclick="navTo('referral')">👥 Referral</a>
+        <a onclick="navTo('dashboard')">📊 Dashboard</a>
+        <a onclick="navTo('contact')">📞 Contact</a>
         <a onclick="navTo('support')">💬 Support</a>
-        <a onclick="navTo('faq')">📚 FAQ</a>
-        <a onclick="navTo('login')">🔐 Login</a>
         <div class="cta" id="openSpinBtn" onclick="openWheel()">🎡 Spin Now</div>
       </nav>
 
+      <!-- Language Switcher -->
+      <div id="google_translate_element"></div>
+
       <button class="hamburger" id="hamburger" aria-expanded="false">☰</button>
+      
+      <!-- Mobile Nav -->
       <div class="mobile-nav hidden" id="mobileNav" role="navigation" aria-hidden="true">
         <a onclick="navTo('home');closeMobile()">🏠 Home</a>
-        <a onclick="navTo('dashboard');closeMobile()">📊 Dashboard</a>
+        <a onclick="openWheel();closeMobile()">🎡 Spin & Win</a>
         <a onclick="navTo('deposit');closeMobile()">💰 Deposit</a>
         <a onclick="navTo('withdraw');closeMobile()">💸 Withdraw</a>
-        <a onclick="navTo('referral');closeMobile()">👥 Referral</a>
+        <a onclick="navTo('dashboard');closeMobile()">📊 Dashboard</a>
+        <a onclick="navTo('contact');closeMobile()">📞 Contact Us</a>
         <a onclick="navTo('support');closeMobile()">💬 Support</a>
-        <a onclick="navTo('faq');closeMobile()">📚 FAQ</a>
-        <a onclick="navTo('login');closeMobile()">🔐 Login</a>
-        <a onclick="openWheel();closeMobile()">🎡 Spin Now</a>
       </div>
     </header>
 
@@ -173,18 +200,46 @@
         </div>
 
         <div class="card">
-          <h2>👥 What Players Say</h2>
-          <div id="testimonials" style="margin-top:12px">
-            <div class="testimonial active" style="background:var(--glass);padding:12px;border-radius:8px;margin-bottom:8px">
+          <h2>👥 What Our Players Say</h2>
+          <div class="testimonial-slider" id="testimonials">
+            <div class="testimonial active">
               <div style="color:var(--warning)">⭐⭐⭐⭐⭐</div>
               <p>"Won $3,000 bonus on first spin! Fast and legit!"</p>
               <div class="note">— Lucas M., Spain</div>
             </div>
-            <div class="testimonial" style="background:var(--glass);padding:12px;border-radius:8px;margin-bottom:8px;display:none">
+            <div class="testimonial">
               <div style="color:var(--warning)">⭐⭐⭐⭐⭐</div>
               <p>"Easy crypto deposits and quick withdrawals!"</p>
               <div class="note">— Ava C., Singapore</div>
             </div>
+            <div class="testimonial">
+              <div style="color:var(--warning)">⭐⭐⭐⭐⭐</div>
+              <p>"Best bonuses I've ever seen! Highly recommend!"</p>
+              <div class="note">— Michael R., USA</div>
+            </div>
+            <div class="testimonial">
+              <div style="color:var(--warning)">⭐⭐⭐⭐⭐</div>
+              <p>"Support team helped me instantly. Great experience!"</p>
+              <div class="note">— Sarah K., UK</div>
+            </div>
+            <div class="testimonial">
+              <div style="color:var(--warning)">⭐⭐⭐⭐⭐</div>
+              <p>"The spinning wheel is so exciting! Won big!"</p>
+              <div class="note">— Tom L., Australia</div>
+            </div>
+            <div class="testimonial-dots" id="testimonialDots"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SPIN & WIN -->
+      <section id="spin" class="card-section hidden">
+        <div class="card">
+          <h2>🎡 Spin & Win</h2>
+          <p class="lead">Enter deposit amount and spin to unlock massive bonuses!</p>
+          <button onclick="openWheel()" class="cta" style="width:100%;padding:16px;margin-top:12px;font-size:18px">🎯 SPIN FOR MORE!</button>
+          <div class="flex" style="margin-top:12px;justify-content:center">
+            <button onclick="navTo('deposit')" class="ghost">💰 Deposit Now</button>
           </div>
         </div>
       </section>
@@ -218,6 +273,7 @@
       <section id="deposit" class="card-section hidden">
         <div class="card">
           <h2>💰 Deposit</h2>
+          <h3>🎯 Crypto Deposit</h3>
           <div class="flex">
             <button id="bankBtn" class="payment-method active" style="flex:1">🏦 Bank</button>
             <button id="cryptoBtn" class="payment-method" style="flex:1">₿ Crypto</button>
@@ -259,15 +315,17 @@
         </div>
       </section>
 
-      <!-- REFERRAL -->
-      <section id="referral" class="card-section hidden">
+      <!-- CONTACT US -->
+      <section id="contact" class="card-section hidden">
         <div class="card">
-          <h2>👥 Referral</h2>
-          <div class="flex" style="align-items:center">
-            <input id="refCode" type="text" readonly style="flex:1" />
-            <button id="copyRef" class="cta" style="padding:10px">Copy Link</button>
-          </div>
-          <div class="note" style="margin-top:8px">Share and earn bonuses when friends deposit!</div>
+          <h2>📞 Contact Us</h2>
+          <form class="contact-form">
+            <input type="text" id="contactName" placeholder="Your Name" required />
+            <input type="email" id="contactEmail" placeholder="Your Email" required />
+            <textarea id="contactMessage" placeholder="Your Message..." rows="5" required></textarea>
+            <button type="submit">📤 Send Message</button>
+          </form>
+          <div id="contactMsg" class="note"></div>
         </div>
       </section>
 
@@ -279,28 +337,6 @@
           <textarea id="supportMsg" placeholder="Your message..." rows="4"></textarea>
           <button onclick="submitSupport()">Send Message</button>
           <div id="supportNote" class="note"></div>
-        </div>
-      </section>
-
-      <!-- FAQ -->
-      <section id="faq" class="card-section hidden">
-        <div class="card">
-          <h2>📚 FAQ</h2>
-          <details><summary>How does spinning work?</summary><div class="note">Enter deposit amount and spin to win bonuses!</div></details>
-          <details><summary>Minimum deposit?</summary><div class="note">$50 minimum required.</div></details>
-        </div>
-      </section>
-
-      <!-- LOGIN -->
-      <section id="login" class="card-section hidden">
-        <div class="card">
-          <h2>🔐 Login</h2>
-          <input id="loginEmail" type="email" placeholder="Email" />
-          <input id="loginPass" type="password" placeholder="Password" />
-          <div class="flex">
-            <button id="loginBtn" onclick="login()">Login</button>
-          </div>
-          <div id="loginMsg" class="note"></div>
         </div>
       </section>
     </main>
@@ -332,6 +368,7 @@
             <div class="pointer"></div>
             <div class="wheel" id="wheel">
               <div class="center">SPIN</div>
+              <!-- Dynamic labels will be added here -->
             </div>
           </div>
         </div>
@@ -349,6 +386,16 @@
   </div>
 
 <script>
+/* Google Translate */
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    includedLanguages: 'en,es,fr,de,it,pt,ru,zh,TW,ja,ko,ar',
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+    autoDisplay: false
+  }, 'google_translate_element');
+}
+
 /* Background */
 (function() {
   const bg = document.getElementById('bg');
@@ -374,10 +421,17 @@
 
 /* Navigation */
 function navTo(id) {
-  document.querySelectorAll('.card-section').forEach(s => s.classList.add('hidden'));
-  document.getElementById(id).classList.remove('hidden');
+  document.querySelectorAll('.card-section').forEach(s => {
+    s.classList.add('hidden');
+    s.classList.remove('active');
+  });
+  const targetSection = document.getElementById(id);
+  if (targetSection) {
+    targetSection.classList.remove('hidden');
+    targetSection.classList.add('active');
+  }
   document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-  event.target.classList.add('active');
+  event?.target?.classList.add('active');
   closeMobile();
   window.scrollTo({top:0,behavior:'smooth'});
 }
@@ -391,37 +445,87 @@ document.getElementById('hamburger').addEventListener('click', () => {
   document.getElementById('mobileNav').classList.toggle('hidden');
 });
 
-/* Testimonials Rotation */
+/* Testimonials Slider */
 function initTestimonials() {
   const testimonials = document.querySelectorAll('.testimonial');
-  let current = 0;
-  function rotate() {
-    testimonials.forEach(t => t.style.display = 'none');
-    testimonials[current].style.display = 'block';
-    current = (current + 1) % testimonials.length;
+  const dotsContainer = document.getElementById('testimonialDots');
+  
+  // Create dots
+  testimonials.forEach((_, index) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot';
+    if (index === 0) dot.classList.add('active');
+    dot.onclick = () => goToSlide(index);
+    dotsContainer.appendChild(dot);
+  });
+  
+  let currentSlide = 0;
+  const totalSlides = testimonials.length;
+  
+  function goToSlide(slide) {
+    testimonials.forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+    
+    testimonials[slide].classList.add('active');
+    document.querySelectorAll('.dot')[slide].classList.add('active');
+    currentSlide = slide;
   }
-  rotate();
-  setInterval(rotate, 5000); // 5 seconds
+  
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    goToSlide(currentSlide);
+  }
+  
+  // Start auto-slide
+  setInterval(nextSlide, 5000);
 }
 
-/* Wheel Segments */
+/* Wheel Segments with Labels */
 const segments = [
-  {deposit:100, prize:500, color:'#0a7fe6'},
-  {deposit:0, prize:0, color:'#07335a'},
-  {deposit:200, prize:1000, color:'#0a7fe6'},
-  {deposit:0, prize:0, color:'#07335a'},
-  {deposit:500, prize:3000, color:'#0a7fe6'},
-  {deposit:0, prize:0, color:'#07335a'},
-  {deposit:1000, prize:6000, color:'#0a7fe6'},
-  {deposit:2000, prize:12000, color:'#0a7fe6'},
-  {deposit:0, prize:0, color:'#07335a'},
-  {deposit:10000, prize:60000, color:'#0a7fe6'}
+  {deposit:100, prize:500, color:'#0a7fe6', label:'$500'},
+  {deposit:0, prize:0, color:'#07335a', label:''},
+  {deposit:200, prize:1000, color:'#0a7fe6', label:'$1K'},
+  {deposit:0, prize:0, color:'#07335a', label:''},
+  {deposit:500, prize:3000, color:'#0a7fe6', label:'$3K'},
+  {deposit:0, prize:0, color:'#07335a', label:''},
+  {deposit:1000, prize:6000, color:'#0a7fe6', label:'$6K'},
+  {deposit:0, prize:0, color:'#07335a', label:''},
+  {deposit:2000, prize:12000, color:'#0a7fe6', label:'$12K'},
+  {deposit:10000, prize:60000, color:'#0a7fe6', label:'$60K'}
 ];
+
+function updateWheelLabels() {
+  const wheel = document.getElementById('wheel');
+  const anglePerSegment = 360 / segments.length;
+  
+  segments.forEach((segment, index) => {
+    let label = document.createElement('div');
+    label.className = 'wheel-label';
+    label.textContent = segment.label;
+    label.style.position = 'absolute';
+    
+    // Position label in center of segment
+    const angle = (index * anglePerSegment) + (anglePerSegment / 2);
+    const radius = 120; // Distance from center
+    const rad = (angle * Math.PI) / 180;
+    const x = Math.cos(rad) * radius;
+    const y = Math.sin(rad) * radius;
+    
+    label.style.left = `calc(50% + ${x}px - 20px)`;
+    label.style.top = `calc(50% + ${y}px - 10px)`;
+    label.style.transform = `rotate(${angle}deg)`;
+    label.style.transformOrigin = '0 0';
+    
+    wheel.appendChild(label);
+  });
+}
 
 /* Wheel Functions */
 function openWheel() {
   document.getElementById('wheelModal').classList.remove('hidden');
+  updateWheelLabels();
   setTimeout(() => document.getElementById('spinAmount').focus(), 100);
+  navTo('spin'); // Also navigate to spin section
 }
 
 function closeWheel() {
@@ -443,14 +547,20 @@ function spinWheel() {
   const btn = document.getElementById('spinBtn');
   const wheel = document.getElementById('wheel');
   
-  // Start spinning button
   btn.classList.add('spinning');
   btn.disabled = true;
   btn.textContent = 'SPINNING...';
   
-  // Spin wheel
-  const idx = segments.findIndex(s => s.deposit === amount) !== -1 ? 
-    segments.findIndex(s => s.deposit === amount) : Math.floor(Math.random() * segments.length);
+  // Find matching segment or random
+  let targetSegment = segments.find(s => s.deposit === amount);
+  let idx;
+  if (targetSegment) {
+    idx = segments.indexOf(targetSegment);
+  } else {
+    idx = Math.floor(Math.random() * segments.length);
+    targetSegment = segments[idx];
+  }
+  
   const spins = 5 + Math.random() * 3;
   const anglePer = 360 / segments.length;
   const target = spins * 360 - (idx * anglePer + anglePer/2);
@@ -461,13 +571,13 @@ function spinWheel() {
     btn.disabled = false;
     btn.textContent = 'SPIN AGAIN';
     
-    const result = segments[idx];
+    const result = targetSegment;
     const msg = document.getElementById('spinResultMsg');
     
     if (result.prize > 0) {
       msg.innerHTML = `<div style="color:var(--success);font-size:20px;font-weight:900">🎉 Won $${result.prize.toLocaleString()}!</div>
                        <div class="note">Deposit $${result.deposit} to claim instantly!</div>`;
-      showCelebration(result.prize);
+      showCelebration(result.prize, result.deposit);
       document.getElementById('depositAmount').value = result.deposit;
       saveRecord('spins', {deposit:result.deposit, prize:result.prize, won:true});
     } else {
@@ -479,14 +589,14 @@ function spinWheel() {
   }, 6000);
 }
 
-/* Celebration */
-function showCelebration(prize) {
+/* Enhanced Celebration */
+function showCelebration(prize, depositRequired) {
   document.getElementById('prize-amount').textContent = `$${prize.toLocaleString()}`;
+  document.getElementById('deposit-prompt').textContent = `Deposit $${depositRequired} to withdraw your winnings!`;
   const celebration = document.getElementById('celebration');
   const stars = document.getElementById('celebrationStars');
   celebration.classList.add('show');
   
-  // Stars animation
   stars.innerHTML = '';
   for (let i = 0; i < 15; i++) {
     const star = document.createElement('div');
@@ -500,10 +610,34 @@ function showCelebration(prize) {
     stars.appendChild(star);
   }
   
-  setTimeout(() => celebration.classList.remove('show'), 5000);
+  setTimeout(() => celebration.classList.remove('show'), 6000);
 }
 
-/* Local Storage */
+/* Contact Form */
+document.querySelector('.contact-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const name = document.getElementById('contactName').value;
+  const email = document.getElementById('contactEmail').value;
+  const message = document.getElementById('contactMessage').value;
+  
+  if (name && email && message) {
+    document.getElementById('contactMsg').innerHTML = '<span style="color:var(--success)">✅ Message sent successfully!</span>';
+    saveRecord('contacts', {name, email, message, timestamp: new Date().toISOString()});
+    document.querySelector('.contact-form').reset();
+    setTimeout(() => navTo('home'), 2000);
+  }
+});
+
+function submitSupport() {
+  const subject = document.getElementById('supportSubject').value;
+  const message = document.getElementById('supportMsg').value;
+  if (subject && message) {
+    document.getElementById('supportNote').innerHTML = '<span style="color:var(--success)">✅ Support ticket created!</span>';
+    saveRecord('support', {subject, message, timestamp: new Date().toISOString()});
+  }
+}
+
+/* Local Storage & Dashboard */
 function saveRecord(type, data) {
   const records = JSON.parse(localStorage.getItem(`ew_${type}`) || '[]');
   records.unshift({...data, id: Date.now(), timestamp: new Date().toISOString()});
@@ -522,13 +656,16 @@ function updateDashboard() {
   document.getElementById('summaryDeposits').textContent = `$${totalDeposits.toLocaleString()}`;
   document.getElementById('summaryWithdraws').textContent = withdraws.length;
   
-  // Activity
   const activity = [...spins, ...deposits, ...withdraws].slice(0, 5).reverse();
   const list = document.getElementById('activityList');
-  list.innerHTML = activity.map(r => `<div class="note">${r.won ? '🎉 Won' : r.amount ? '💰 Deposit' : '💸 Withdraw'} ${r.prize || r.amount || ''} - ${new Date(r.timestamp).toLocaleString()}</div>`).join('');
+  list.innerHTML = activity.map(r => {
+    if (r.won) return `<div class="note">🎉 Won $${r.prize?.toLocaleString()} - ${new Date(r.timestamp).toLocaleString()}</div>`;
+    if (r.amount) return `<div class="note">💰 Deposit $${r.amount?.toLocaleString()} - ${new Date(r.timestamp).toLocaleString()}</div>`;
+    return `<div class="note">💸 Withdraw - ${new Date(r.timestamp).toLocaleString()}</div>`;
+  }).join('');
 }
 
-/* Deposit/Withdraw */
+/* Deposit/Withdraw Functions */
 document.getElementById('bankBtn').addEventListener('click', () => {
   document.getElementById('bankDetails').classList.remove('hidden');
   document.getElementById('cryptoDetails').classList.add('hidden');
@@ -541,8 +678,8 @@ document.getElementById('cryptoBtn').addEventListener('click', () => {
 function confirmDeposit() {
   const amount = parseInt(document.getElementById('depositAmount').value);
   if (amount < 50) return alert('Minimum $50');
-  saveRecord('deposits', {amount, method: 'bank', status: 'pending'});
-  document.getElementById('depositMsg').innerHTML = '<span style="color:var(--success)">✅ Deposit recorded!</span>';
+  saveRecord('deposits', {amount, method: document.querySelector('.payment-method.active').id.includes('crypto') ? 'crypto' : 'bank', status: 'pending'});
+  document.getElementById('depositMsg').innerHTML = '<span style="color:var(--success)">✅ Deposit recorded! Processing...</span>';
   updateDashboard();
 }
 
@@ -551,20 +688,21 @@ function requestWithdraw() {
   const dest = document.getElementById('withdrawDest').value;
   if (amount < 100 || !dest) return alert('Minimum $100 and destination required');
   saveRecord('withdraws', {amount, dest, status: 'pending'});
-  document.getElementById('withdrawMsg').innerHTML = '<span style="color:var(--success)">✅ Request submitted!</span>';
+  document.getElementById('withdrawMsg').innerHTML = '<span style="color:var(--success)">✅ Request submitted! Processing...</span>';
   updateDashboard();
 }
 
 function copyText(text) {
-  navigator.clipboard.writeText(text).then(() => alert('Copied!'));
+  navigator.clipboard.writeText(text).then(() => alert('Copied to clipboard!'));
 }
 
-/* Form Listeners */
+/* Form Listeners & Init */
 document.addEventListener('DOMContentLoaded', () => {
   initTestimonials();
   updateDashboard();
+  updateWheelLabels();
   
-  // Enable buttons
+  // Form validations
   document.getElementById('spinAmount').oninput = () => {
     const amount = parseInt(document.getElementById('spinAmount').value);
     document.getElementById('spinBtn').disabled = !amount || amount < 50;
@@ -580,7 +718,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('withdrawSubmit').disabled = !amount || amount < 100 || !document.getElementById('withdrawDest').value;
   };
   
-  // Auto-open wheel
+  // Auto-open wheel for new users
   if (!localStorage.getItem('wheelSeen')) {
     setTimeout(openWheel, 2000);
     localStorage.setItem('wheelSeen', '1');
