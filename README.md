@@ -1,2 +1,1 @@
-# rchies-mobile-
-Rchies Mobile - Secure banking platform for deposits, withdrawals, bill payments, and more.
+EasyWin – Secure investment and rewards platform for deposits, withdrawals, promos, and more.
